@@ -16,11 +16,12 @@
     "secret": "secret"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "sitekingdom",
+    "password": "KingSite18!",
+    "database": "kingdom",
+    "host": "143.255.143.94",
     "dialect": "mysql",
+    "port": "7123",
     "secret": "secret"
   }
 }
