@@ -1,11 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": "admin",
+    "database": "kingdom",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "secret": "secret"
+    "url": "http://localhost/wordpress-api/wordpress/index.php/",
+    "consumerKey": "ck_373e368d8bc15022d46eca2ab49afe4e0307063a",
+    "consumerSecret": "cs_e8087a322617ba8cd89fe4b93f8e997b1d6709f0",
+    "wpAPI": true,
+    "version": "wc/v2"
   },
   "test": {
     "username": "root",
@@ -13,7 +17,11 @@
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "secret": "secret"
+    "url": "http://localhost/wordpress-api/wordpress/index.php/",
+    "consumerKey": "ck_373e368d8bc15022d46eca2ab49afe4e0307063a",
+    "consumerSecret": "cs_e8087a322617ba8cd89fe4b93f8e997b1d6709f0",
+    "wpAPI": true,
+    "version": "wc/v2"
   },
   "production": {
     "username": "sitekingdom",
@@ -22,6 +30,10 @@
     "host": "143.255.143.94",
     "dialect": "mysql",
     "port": "7123",
-    "secret": "secret"
+    "url": "http://localhost/wordpress-api/wordpress/index.php/",
+    "consumerKey": "ck_373e368d8bc15022d46eca2ab49afe4e0307063a",
+    "consumerSecret": "cs_e8087a322617ba8cd89fe4b93f8e997b1d6709f0",
+    "wpAPI": true,
+    "version": "wc/v2"
   }
 }

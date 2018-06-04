@@ -34,14 +34,14 @@ app.use(express.static(__dirname + '/'));
 // Models of the server
 var models = require('./models/');
 
-// models.sequelize
-//     .authenticate()
-//     .then(function() {
-//         console.log('Connection successful');
-//     })
-//     .catch(function(error) {
-//         console.log('Error creating connection');
-//     });
+models.sequelize
+    .authenticate()
+    .then(function() {
+        console.log('Connection successful');
+    })
+    .catch(function(error) {
+        console.log('Error creating connection');
+    });
 
 // Listen server
 app.set('port', process.env.PORT || 3000);

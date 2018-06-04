@@ -1,7 +1,7 @@
 {
   "name": "apirest",
   "version": "0.0.1",
-  "description": "ApiRest generado en el bootcamp02",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js"
@@ -12,7 +12,7 @@
     "sequelize",
     "express"
   ],
-  "author": "BootCamp02",
+  "author": "Cristián Paniagua",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",

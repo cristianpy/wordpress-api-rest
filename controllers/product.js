@@ -10,26 +10,68 @@ module.exports = {
         var WooCommerceAPI = require('woocommerce-api');
  
         var WooCommerce = new WooCommerceAPI({
-        url: 'http://localhost/wordpress-api/wordpress/index.php/',
-        consumerKey: 'ck_373e368d8bc15022d46eca2ab49afe4e0307063a',
-        consumerSecret: 'cs_e8087a322617ba8cd89fe4b93f8e997b1d6709f0',
-        wpAPI: true,
-        version: 'wc/v2'
+            url: config.url,
+            consumerKey: config.consumerKey,
+            consumerSecret: config.consumerSecret,
+            wpAPI: config.wpAPI,
+            version: config.version
         });
         WooCommerce.getAsync('products')
         .then(function(result) {
-            var products = JSON.parse(result.body);
-            res.status(200).send(products);            
+            var product = JSON.parse(result.body);
+            res.status(200).send(product);            
+        })
+        .catch(function(err) {
+            res.status(200).send(err);            
         });
     },
     //findAllDB
     findAllDB(req, res) {
-      Product.findAll()
+        Product.findAll()
         .then(function(result) {
             res.status(200).json(result);
         })
         .catch(function(err) {
             res.status(500).json(err);
         });
-  },
+    },
+    //createWOO
+    createWOO(req, res) {
+        var WooCommerceAPI = require('woocommerce-api');
+        
+        var WooCommerce = new WooCommerceAPI({
+            url: config.url,
+            consumerKey: config.consumerKey,
+            consumerSecret: config.consumerSecret,
+            wpAPI: config.wpAPI,
+            version: config.version
+        });
+        Product.findAll({limit:10})
+        // Product.findAll()
+        .then(function (result) {
+            for (var index = 0; index < result.length; index++) {
+                var prod = result[index];
+                var data = {
+                    name: prod.name,
+                    type: 'simple',
+                    regular_price: prod.regular_price,
+                    description: '',
+                    short_description: prod.id.toString(),
+                    categories: [{id: 1}],
+                };
+        
+                WooCommerce.postAsync('products', data)
+                .then(function(result) {
+                    console.log("Producto nuevo agregado");         
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+            }
+            res.status(200).send("Ok!");
+        })
+        .catch(function(err) {
+            res.status(500).json(err);
+        });
+    },
 };
