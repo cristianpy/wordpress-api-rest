@@ -43,8 +43,30 @@ models.sequelize
         console.log('Error creating connection');
     });
 
+//Teste cron (TRANSLADAR A OTRO ARCHIVO)
+var cron = require('cron');
+/**
+ * Seconds: 0-59
+ * Minutes: 0-59
+ * Hours: 0-23
+ * Day of Month: 1-31
+ * Months: 0-11 (Jan-Dec)
+ * Day of Week: 0-6 (Sun-Sat)
+ */
+
+var job1 = new cron.CronJob({
+  cronTime: '* * * * * *',
+  onTick: function() {
+    console.log('job 1 ticked');
+  },
+  start: false,
+  timeZone: 'America/Los_Angeles'
+});
+
 // Listen server
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
+    job1.start(); // job 1 started
+    console.log('job1 status', job1.running); // job1 status true
     console.log('Server listen on http://localhost:3000');
 });
