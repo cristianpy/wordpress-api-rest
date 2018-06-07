@@ -36,7 +36,7 @@ module.exports = {
         });
     },
     //createWOO
-    createWOO(req, res) {
+    createWOO() {
         var WooCommerceAPI = require('woocommerce-api');
         
         var WooCommerce = new WooCommerceAPI({
@@ -50,13 +50,13 @@ module.exports = {
         // Product.findAll()
         .then(function (result) {
             for (var index = 0; index < result.length; index++) {
-                var prod = result[index];
+                var prodDB = result[index];
                 var data = {
-                    name: prod.name,
+                    name: prodDB.name,
                     type: 'simple',
-                    regular_price: prod.regular_price,
+                    regular_price: prodDB.regular_price,
                     description: '',
-                    short_description: prod.id.toString(),
+                    short_description: prodDB.id.toString(),
                     categories: [{id: 1}],
                 };
         
@@ -68,10 +68,10 @@ module.exports = {
                     console.log(err);
                 });
             }
-            res.status(200).send("Ok!");
+            console.log("Ok!");
         })
         .catch(function(err) {
-            res.status(500).json(err);
+            console.log(err);
         });
     },
 };
