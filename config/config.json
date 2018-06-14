@@ -30,9 +30,9 @@
     "host": "143.255.143.94",
     "dialect": "mysql",
     "port": "7123",
-    "url": "http://localhost/wordpress-api/wordpress/index.php/",
-    "consumerKey": "ck_373e368d8bc15022d46eca2ab49afe4e0307063a",
-    "consumerSecret": "cs_e8087a322617ba8cd89fe4b93f8e997b1d6709f0",
+    "url": "https://bytemain.com/kingdom/index.php/",
+    "consumerKey": "ck_4eaee3c9c61613d4a2e58221cb00784badd09823",
+    "consumerSecret": "cs_5e79cedb42d9adcb1a0bf931566680141654f345",
     "wpAPI": true,
     "version": "wc/v2"
   }
