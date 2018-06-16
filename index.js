@@ -46,6 +46,6 @@ models.sequelize
 // Listen server
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'), function() {
-    // cron.job().start();
+    cron.job().start();
     console.log('Server listen on http://localhost:3000');
 });

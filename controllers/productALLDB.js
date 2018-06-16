@@ -3,6 +3,7 @@ var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var bcrypt = require('bcryptjs');
 var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
+// var dataJSON    = require(__dirname + '/../data/product.json');
 
 module.exports = {
     //findAllWOO
@@ -36,7 +37,7 @@ module.exports = {
         });
     },
     //createWOO
-    createWOO() {
+    createWOO(req, res) {
         var WooCommerceAPI = require('woocommerce-api');
         
         var WooCommerce = new WooCommerceAPI({
@@ -46,43 +47,37 @@ module.exports = {
             wpAPI: config.wpAPI,
             version: config.version
         });
-        var dataJSON    = require(__dirname + '/../data/product.json');
         //FIND ALL PRODUCTS DB
+        var contador = 0;
         Product.findAll()
         .then(function (result) {
             var productsDB = result;
+            var dataJSON    = require(__dirname + '/../data/product.json');
             //For productsDB
             for (var indexDB = 0; indexDB < productsDB.length; indexDB++) {
                 var prodDB = productsDB[indexDB];
-                //For dataJSON
+                //For productsWOO
                 var sw = 0;
-                for (var indexWOO = 0; indexWOO < dataJSON.length; indexWOO++) {
-                    var prodJSON = dataJSON[indexWOO];
-                    // console.log(prodJSON.id + '-' + prodDB.id);
-                    if (prodJSON.id == prodDB.id) {
-                        sw = 1;
-                    }
-                }
                 if (sw == 0) {
                     //DATA TO INSERT
                     var data = {
                         name: prodDB.name,
                         type: 'simple',
                         regular_price: prodDB.regular_price,
-                        // sku: prodDB.id.toString(),
-                        // categories: [{id: 1}],
+                        sku: prodDB.id.toString(),
+                        categories: [{id: 1}],
                     };
                     //INSERT JSON VAR
                     var productIdNew = {id:prodDB.id};
                     dataJSON.push(productIdNew);
                     //INSERT WOO
-                    WooCommerce.postAsync('products', data)
-                    .then(function(result) {
-                        console.log('Add product');         
-                    })
-                    .catch(function(err) {
-                        console.log(err);
-                    });
+                    // WooCommerce.postAsync('products', data)
+                    // .then(function(result) {
+                    //     console.log('Add product - ');         
+                    // })
+                    // .catch(function(err) {
+                    //     console.log(err);
+                    // });
                 }
             }
             //INSERT JSON FILE
@@ -93,9 +88,10 @@ module.exports = {
             fs.appendFile(__dirname + '/../data/product.json', JSON.stringify(dataJSON), (err) => {
                 if (err) throw err;
             });
+            res.status(200).send('OK');
         })
         .catch(function(err) {
-            console.log(err);
+            res.status(500).send(err); 
         });          
     },
 };
