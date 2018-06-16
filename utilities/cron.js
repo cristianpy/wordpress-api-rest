@@ -13,7 +13,7 @@ module.exports = {
     //job1
     job() {
         var job = new cron.CronJob({
-            cronTime: '*/30 * * * * *',
+            cronTime: '0 0 */2 * * *',
             onTick: function() {
                 var fecha = new Date();
                 var hora = fecha.getHours() + ":" + fecha.getMinutes() + ":" + (fecha.getSeconds() < 10 ? ('0' + fecha.getSeconds()) : fecha.getSeconds()); 
